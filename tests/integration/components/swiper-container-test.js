@@ -50,3 +50,14 @@ test('it supports `effect` attribute', function(assert) {
   assert.ok(this.$().has('.swiper-container-fade').length,
     'Container has `fade` class');
 });
+
+test('it supports `paginationCls` attribute', function(assert) {
+  this.render(hbs`{{#swiper-container pagination=true paginationCls='swiper-pagination-white'}} Foo {{/swiper-container}}`);
+  assert.ok(this.$('>:first-child').has('.swiper-pagination.swiper-pagination-white').length);
+});
+
+test('it supports `navigationCls` attribute', function(assert) {
+  this.render(hbs`{{#swiper-container navigation=true navigationCls='swiper-button-white'}} Foo {{/swiper-container}}`);
+  assert.ok(this.$('>:first-child').has('.swiper-button-next.swiper-button-white').length);
+  assert.ok(this.$('>:first-child').has('.swiper-button-prev.swiper-button-white').length);
+});
