@@ -124,12 +124,17 @@ export default Component.extend({
   }),
 
   updateTriggered: observer('updateFor', function() {
-    run.once(this, this.get('swiper').update);
+    run.once(this, function() {
+      this.get('swiper').update();
+      this.get('swiper').slideTo(this.get('currentSlide'));
+    });
   }),
 
   forceUpdate(updateTranslate) {
-    this.get('swiper').update(updateTranslate === undefined ? false : updateTranslate);
-    this.get('swiper').slideTo(this.get('currentSlide'));
+    run.once(this, function() {
+      this.get('swiper').update(updateTranslate === undefined ? false : updateTranslate);
+      this.get('swiper').slideTo(this.get('currentSlide'));
+    });
   },
 
   slideChanged(swiper) {
